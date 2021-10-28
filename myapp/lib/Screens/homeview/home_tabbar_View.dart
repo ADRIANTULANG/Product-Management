@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import 'package:myapp/Screens/homeview/home_controller.dart';
 import 'package:myapp/Screens/homeview/home_drinks_view.dart';
 import 'package:myapp/Screens/homeview/home_food_view.dart';
-// import 'package:myapp/Screens/login/Login_View.dart';
-// import 'package:myapp/helpers/sizer.dart';
-// import 'package:myapp/helpers/storage.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -20,6 +17,11 @@ class HomeView extends GetView<HomeController> {
           appBar: AppBar(
             centerTitle: true,
             title: Text("Product Management"),
+            leading: IconButton(
+                onPressed: () {
+                  controller.logoutConfirmation();
+                },
+                icon: Icon(Icons.logout)),
             actions: [
               PopupMenuButton(
                   icon: Icon(Icons.add),

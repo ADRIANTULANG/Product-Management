@@ -3,7 +3,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:myapp/Screens/homeview/home_api.dart';
 import 'package:myapp/Screens/homeview/home_model.dart';
+import 'package:myapp/Screens/login/Login_View.dart';
 import 'package:myapp/helpers/sizer.dart';
+import 'package:myapp/helpers/storage.dart';
 
 class HomeController extends GetxController {
   // TextEditingController username = TextEditingController();
@@ -314,6 +316,83 @@ class HomeController extends GetxController {
                       },
                       child: Text(
                         'UPDATE',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'Rubik',
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      barrierDismissible: true,
+    );
+  }
+
+  void logoutConfirmation() {
+    var context = Get.context;
+    var s = Sizer();
+    Get.dialog(
+      AlertDialog(
+        contentPadding: EdgeInsets.all(0),
+        content: Container(
+          width: s.width(context: context, width: 80),
+          padding: EdgeInsets.all(5.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15.0),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'Do you want to log out?',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    // fontFamily: 'Rubik',
+                    fontSize: s.font(context: context, fontsize: 20),
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Text(
+                        'CANCEL',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Rubik',
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.find<StorageService>().removeData();
+                        Get.offAll(() => LoginForm());
+                      },
+                      child: Text(
+                        'CONFIRM',
                         style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'Rubik',
